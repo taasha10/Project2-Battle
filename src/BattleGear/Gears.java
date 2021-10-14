@@ -2,7 +2,7 @@ package BattleGear;
 
 import java.util.List;
 
-public interface Gears {
+public interface Gears extends Comparable<Gears> {
 
   String getGearType();
   String getGearName();
@@ -11,4 +11,5 @@ public interface Gears {
   String getAbilityAffected1();
   public BeltSize getBeltSize();
   public void setGearValue();
+  public int compareTo(Gears o);
 }

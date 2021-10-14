@@ -1,5 +1,6 @@
 package BattleGear;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -99,11 +100,26 @@ public abstract class AbstractGear implements Gears{
 
   @Override
   public String toString() {
-    return "Gear{" +
-            "gearName='" + gearName + '\'' +
-            ", gearType='" + gearType + '\'' +
-            ", gearValue='" + getGearValue() + '\'' +
-            ", beltSize='" + getBeltSize() + '\'' +
+    return "{" +'\''+
+            gearName + '\'' +" :: \'"+
+            gearType + '\'' +
             '}';
   }
+
+  protected int compareToHeadGears(Gears o) {
+    return -1;
+  }
+
+  protected int compareToPotions(Gears o) {
+    return -1;
+  }
+
+  protected int compareToBelts(Gears o) {
+    return -1;
+  }
+
+  protected int compareToFootwear(Gears o) {
+    return -1;
+  }
+
 }

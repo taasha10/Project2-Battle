@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import BattleGear.Gears;
+import BattleWeapons.WeaponObjectsFactory;
+import BattleWeapons.Weapons;
 
 public class RandomGen extends Random {
 
@@ -56,7 +58,6 @@ public class RandomGen extends Random {
     return List.of(gearsList1,gearsList2);
   }
 
-
   private List<Gears> randomNegatives(List<Gears> bag){
 
     List<Gears> updated_bag = new ArrayList<>();
@@ -70,6 +71,40 @@ public class RandomGen extends Random {
 
   }
 
+  public int random0To1(){
+    return nextInt(2);
+  }
 
+  public int random1To10(){
+    return 1 + nextInt(10);
+  }
+
+  public int random1To6(){
+    return 1 + nextInt(6);
+  }
+
+  public Weapons randomSelectionOfWeapon(){
+    WeaponObjectsFactory weaponObjectsFactory = new WeaponObjectsFactory();
+  List <Weapons> weaponsList = weaponObjectsFactory.createWeapons();
+   return weaponsList.get(1 + nextInt(14));
+  }
+
+  public int WeaponRange(Weapons weapon, int ability) throws IllegalArgumentException{
+
+    switch(weapon.getWeaponType()){
+      case "Axes":
+      case "Broad Swords":
+        return 6 + nextInt(5);
+      case "Katanas": return 4 + nextInt(3);
+      case "Two Handed Swords":
+      case "Flails":
+        if(ability>14){
+          return 8 + nextInt(5);
+        }else{
+          return 4 + nextInt(3);
+        }
+      default: throw new IllegalArgumentException("Illegal weapon or ability value!");
+    }
+  }
 }
 

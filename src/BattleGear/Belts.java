@@ -36,4 +36,24 @@ public class Belts extends AbstractGear {
   public BeltSize getBeltSize() {
     return beltSize;
   }
+
+  protected int compareToBelts(Gears o) {
+    return 0;
+  }
+
+  @Override
+  public int compareTo(Gears o) {
+
+    AbstractGear g = (AbstractGear) o;
+    if (g.compareToBelts(this) == 0) {
+      return this.getGearName().compareTo(g.getGearName());
+    } else if(g.compareToFootwear(this)==0){
+      return -1;
+    }
+    else {
+      return 1;
+    }
+  }
+
+
 }

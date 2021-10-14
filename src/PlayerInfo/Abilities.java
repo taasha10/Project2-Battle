@@ -86,7 +86,7 @@ public class Abilities {
 
   @Override
   public String toString() {
-    return "PlayerInfo.Abilities{" +
+    return "Abilities{" +
             "strength=" + strength +
             ", constitution=" + constitution +
             ", dexterity=" + dexterity +

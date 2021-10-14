@@ -1,8 +1,11 @@
 package PlayerInfo;
 
+import java.util.Collections;
 import java.util.List;
 
 import BattleGear.Gears;
+import BattleWeapons.Weapons;
+import random.RandomGen;
 
 public class Player {
 
@@ -10,13 +13,21 @@ public class Player {
   Abilities abilities;
   Abilities effectiveAbilities;
   List<Gears> playerGears;
+  List<Weapons> playerWeapon;
+  RandomGen randomGen = new RandomGen();
 
   public String getPlayerId() {
     return playerId;
   }
 
   public List<Gears> getPlayerGears() {
+    Collections.sort(playerGears);
     return playerGears;
+
+  }
+
+  public List<Weapons> getPlayerWeapon() {
+    return playerWeapon;
   }
 
   public Player(int id) {
@@ -37,6 +48,10 @@ public class Player {
 
   public void setPlayerGears(List<Gears> playerGears) {
     this.playerGears = playerGears;
+  }
+
+  public void setPlayerWeapon(List<Weapons> playerWeapon) {
+    this.playerWeapon = playerWeapon;
   }
 
   public void calEffectiveAbilities() {
@@ -61,27 +76,39 @@ public class Player {
   }
 
   private void checkAbilityAffected(String ability,int gearValue){
-
-    System.out.println(ability+":::"+gearValue);
+    int check;
+//    System.out.println(ability+":::"+gearValue);
     switch (ability) {
-      case "Strength": effectiveAbilities.setStrength(effectiveAbilities.getStrength()
-              +gearValue);
+      case "Strength": check = effectiveAbilities.getStrength() + gearValue;
+      if(check>0){effectiveAbilities.setStrength(check);}
       break;
-      case "Constitution": effectiveAbilities.setConstitution(effectiveAbilities.getConstitution()
-              +gearValue);
+      case "Constitution": check = effectiveAbilities.getConstitution() + gearValue;
+        if(check>0){effectiveAbilities.setConstitution(check);}
       break;
-      case "Dexterity": effectiveAbilities.setDexterity(effectiveAbilities.getDexterity()
-              +gearValue);
+      case "Dexterity": check = effectiveAbilities.getDexterity() + gearValue;
+        if(check>0){effectiveAbilities.setDexterity(check);}
       break;
-      case "Charisma": effectiveAbilities.setCharisma(effectiveAbilities.getCharisma()
-              +gearValue);
+      case "Charisma": check = effectiveAbilities.getCharisma()
+              +gearValue;
+        if(check>0){effectiveAbilities.setCharisma(check);}
       break;
     }
+    effectiveAbilities.setHealth(effectiveAbilities.getStrength()
+            + effectiveAbilities.getConstitution() + effectiveAbilities.getCharisma()
+            + effectiveAbilities.getDexterity());
   }
 
-//  public int calStrikingPower(){
-//    abilities.getStrength() +
-//  }
+  public int calStrikingPower(){
+    int strike = effectiveAbilities.getStrength() + randomGen.random1To10();
+//    System.out.println(playerId+strike);
+    return strike;
+  }
+
+  public int calAvoidanceAbility(){
+    int avoid = effectiveAbilities.getDexterity() + randomGen.random1To6();
+//    System.out.println(playerId+avoid);
+    return avoid;
+  }
 
   @Override
   public String toString() {
@@ -90,4 +117,5 @@ public class Player {
             ", abilities=" + abilities +
             '}';
   }
+
 }

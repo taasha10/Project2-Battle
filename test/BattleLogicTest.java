@@ -23,9 +23,15 @@ public class BattleLogicTest {
     System.out.println(battleLogic.createPlayer());
   }
 
+
   @Test
   public void testEquipPlayer(){
     battleLogic.equipPlayer();
+  }
+
+  @Test
+  public void testCallRequestWeaponFromArmory() {
+    battleLogic.callRequestWeaponFromArmory();
   }
 }
 
