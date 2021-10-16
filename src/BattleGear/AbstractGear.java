@@ -1,47 +1,52 @@
-package BattleGear;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+package battlegear;
 
 import random.RandomGen;
 
-public abstract class AbstractGear implements Gears{
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Abstract class to represent different types of gears.
+ */
+public abstract class AbstractGear implements Gears {
   protected final String gearName;
   protected final String gearType;
-  protected int[] gearValue;
   protected final String abilityAffected;
-  protected final String abilityAffected1;
-  RandomGen rg = new RandomGen();
+  protected String abilityAffected1;
+  protected int[] gearValue;
+  protected RandomGen rg = new RandomGen();
 
   protected AbstractGear(String gearType, String gearName, int... gearValue) {
     this.gearName = gearName;
     this.gearType = gearType;
     this.gearValue = gearValue;
 
-    if(gearValue.length==2 )
-    {
+    if (gearValue.length == 2) {
       this.abilityAffected = rg.randomPotion();
-      this.abilityAffected1 = rg.randomPotion();
+      do {
+        this.abilityAffected1 = rg.randomPotion();
+      }
+      while (abilityAffected.equals(abilityAffected1));
     }
-    else if(gearValue.length==1) {
+    else if (gearValue.length == 1) {
       {
         this.abilityAffected = rg.randomPotion();
-        this.abilityAffected1 = null;
+        this.abilityAffected1 = "NA";
       }
     }
     else {
-      this.abilityAffected = this.abilityAffected1 = null;
+      this.abilityAffected = this.abilityAffected1 = "NA";
     }
 
   }
 
-  protected AbstractGear(String gearType, String gearName, String abilityAffected,int... gearValue) {
+  protected AbstractGear(String gearType, String gearName, String abilityAffected,
+                         int... gearValue) {
     this.gearName = gearName;
     this.gearType = gearType;
     this.gearValue = gearValue;
     this.abilityAffected = abilityAffected;
-    this.abilityAffected1 = null;
+    this.abilityAffected1 = "NA";
   }
 
   @Override
@@ -56,16 +61,13 @@ public abstract class AbstractGear implements Gears{
 
   @Override
   public List<Integer> getGearValue() {
-    if(gearValue.length==2 )
-    {
-      return List.of(gearValue[0],gearValue[1]);
-    }
-    else if(gearValue.length==1) {
+    if (gearValue.length == 2) {
+      return List.of(gearValue[0], gearValue[1]);
+    } else if (gearValue.length == 1) {
       {
         return Collections.singletonList(gearValue[0]);
       }
     }
-
     return List.of();
   }
 
@@ -87,23 +89,18 @@ public abstract class AbstractGear implements Gears{
   @Override
   public void setGearValue() {
 
-    if(gearValue.length==2 )
-    {
+    if (gearValue.length == 2) {
       gearValue[0] *= -1;
       gearValue[1] *= -1;
-    }
-    else if(gearValue.length==1)
-    { gearValue[0] *= -1;
+    } else if (gearValue.length == 1) {
+      gearValue[0] *= -1;
     }
 
   }
 
   @Override
   public String toString() {
-    return "{" +'\''+
-            gearName + '\'' +" :: \'"+
-            gearType + '\'' +
-            '}';
+    return "{" + '\'' + gearName + '\'' + " :: \'" + gearType + '\'' + '}';
   }
 
   protected int compareToHeadGears(Gears o) {

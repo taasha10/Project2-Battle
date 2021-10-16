@@ -1,5 +1,7 @@
-package BattleGear;
+package battlegear;
 
+/**Enum to represent the size of the belt.
+ */
 public enum BeltSize {
   small(1), medium(2), large(4);
 
@@ -11,6 +13,7 @@ public enum BeltSize {
 
   /**
    * to obtain the unit of a belt.
+   *
    * @return unit
    */
   public int getUnits() {

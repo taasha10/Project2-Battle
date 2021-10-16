@@ -1,28 +1,35 @@
-package BattleWeapons;
+package battleweapons;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Factory class for creating objects of type Weapon.
+ */
 public class WeaponObjectsFactory {
 
   private Weapons getWeapon(String weaponType, String weaponName) {
-    if (weaponType == "Axes") {
-
-      return new Axes(weaponName);
-    } else if (weaponType == "Flails") {
-      return new Flails(weaponName);
-    } else if (weaponType == "Katanas") {
-      return new Katanas(weaponName);
-    } else if (weaponType == "Two Handed Swords") {
-      return new TwoHandedSwords(weaponName);
-    } else if (weaponType == "Broad Swords") {
-      return new BroadSwords(weaponName);
-    } else {
-      return null;
+    switch (weaponType) {
+      case "Axes":
+        return new Axes(weaponName);
+      case "Flails":
+        return new Flails(weaponName);
+      case "Katanas":
+        return new Katanas(weaponName);
+      case "Two Handed Swords":
+        return new TwoHandedSwords(weaponName);
+      case "Broad Swords":
+        return new BroadSwords(weaponName);
+      default:
+        return null;
     }
 
   }
 
+  /** Method to return objects of Weapon type.
+   *
+   * @return List of weapons.
+   */
   public List<Weapons> createWeapons() {
     List<Weapons> weaponList = new ArrayList<>();
 

@@ -1,9 +1,11 @@
-package BattleWeapons;
+package battleweapons;
 
-public abstract class AbstractWeapon implements Weapons{
+/**
+ * Abstract class for different types of weapons.
+ */
+public abstract class AbstractWeapon implements Weapons {
   protected final String weaponName;
   protected final String weaponType;
-//  protected int damageValue;
 
   protected AbstractWeapon(String weaponName, String weaponType) {
     this.weaponName = weaponName;
@@ -23,8 +25,6 @@ public abstract class AbstractWeapon implements Weapons{
 
   @Override
   public String toString() {
-    return "{'" + weaponName + "\' :: '" +
-            weaponType + '\'' +
-            '}';
+    return "{'" + weaponName + " :: " + weaponType + '\'' + '}';
   }
 }
